@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> sign in / register page </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+        <!-- error message -->
+        {% if message %}
+            <p style="color: red; font-weight: bold;">{{ message }}</p>
+        {% endif %}
+        <div class="login-box">
+        <form action="/login" method="POST">
+            <input type="email" name="email" placeholder="Email Address" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <div class="inline-items">
+                <label>
+                </label>
+            </div>
+            <input type="submit" value="Login">
+            <p>Not a member? <a href="/register">Sign up now</a></p>
+        </form>
+    </div>
+</body>
+</html>

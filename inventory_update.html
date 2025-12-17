@@ -1,0 +1,68 @@
+<!--  NOTE - For adding a new cloth item, the image path will only be added through the "images" folder inside the "static" folder. -->
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    </head>
+    <body>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Inventory</title>
+    </body>
+        <div class="container">
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="/logout">Logout</a>
+            </div>
+    <div class="container">
+        <h1>Manage Inventory</h1>
+
+        <!-- Add a New Item -->
+        <h2>Add a New Item</h2>
+        <form method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="action" value="add">
+            <label for="cloth_ID">Item ID:</label>
+            <input type="number" name="cloth_ID" required>
+
+            <label for="cloth_name">Item Name:</label>
+            <input type="text" name="cloth_name" required>
+
+            <label for="quantity">Quantity:</label>
+            <input type="number" name="quantity" required>
+
+            <label for="price">Price:</label>
+            <input type="number" step="0.01" name="price" required>
+
+            <label for="cloth_description"> Cloth Description:</label>
+            <input type="text" name="cloth_description" >
+
+            <label for="path_image">Path Image:</label>
+            <input type="file" name="path_image" required>
+
+        <div style="display: flex; align-items: center; margin: 10px 0;">
+            <label for="is_campaigned">Is Campaigned</label>
+            <input type="checkbox" name="is_campaigned" id="is_campaigned">
+        </div>
+                        {% if error %}
+            <p style="color:red;">{{ error }}</p>
+        {% endif %}
+        <div style="margin-top: 20px;">
+            <button type="submit">Add Item</button>
+        </div>
+</form>
+        <!-- Update Existing Inventory -->
+        <h2>Update Inventory</h2>
+        <form method="POST">
+            <input type="hidden" name="action" value="update">
+            <label for="cloth_ID">Item ID:</label>
+            <input type="number" name="cloth_ID" required>
+
+            <label for="quantity">New Quantity:</label>
+            <input type="number" name="quantity" min="0" step="1" required>
+
+            <button type="submit">Update Inventory</button>
+        </form>
+
+        </div>
+</html>

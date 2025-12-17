@@ -1,0 +1,57 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Store Page</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+<div class="store-header">
+    <div class="store-title">TAU FASHION</div>
+</div>
+        <div class="container">
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="/logout">Logout</a>
+            </div>
+            <h1>Store Page</h1>
+
+            <!-- Admin-Only Button -->
+            {% if is_admin %}
+            <div class="admin-actions">
+                <a href="/admin/manage_inventory">
+                    <button>Manage Inventory</button>
+                </a>
+            </div>
+            {% endif %}
+
+            <form action='/store' method="POST">
+                <div class="item-list">
+                    {% for item in items %}
+                        <div class="item">
+                            <img src="{{ url_for('static', filename=item[5]) }}" alt="{{ item[1] }}">
+                            <div class="item-details">
+                                <h2>{{ item[1] }}</h2>
+                                <p>{{ item[6] }}</p>
+                                <p class="price">Price: ${{ item[4] }}</p>
+                                <p>In Stock: {{ item[3] }}</p>
+                            </div>
+                            <div class="item-actions">
+                                <label>
+                                    <input type="checkbox" name="cloth_ID" value="{{ item[0] }}"> Select
+                                </label>
+                                <br>
+                                <label>
+                                    Quantity:
+                                    <input type="number" name="quantity-{{ item[0] }}" min="1" max="{{ item[3] }}" value="1">
+                                </label>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div style="text-align: center; margin-top: 20px;">
+                    <button type="submit">Purchase</button>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>
